@@ -82,41 +82,46 @@ function purchaseProduct(){
         ])
         .then(function(IR){
             console.log("The user would like to purchase " +IR.usrPurchaseAmt+ " of item #" +IR.usrProductID);
-            var query = "UPDATE products set stock_quantity = stock_quantity - ? WHERE item_id=?";
-            connection.query(query,[IR.usrPurchaseAmt,IR.usrProductID], function(err, res){
-                if (err) throw err;
-                console.log("purchase successful, Thank you come back soon!\n");
-                entryPoint();
-            });
+            var itemID = IR.usrProductID;
+            var itemPurchaseQTY = IR.usrPurchaseAmt;
+            
+            var itemObj = itemQuery(itemID);
+            console.log(itemObj);
+            // if (itemObj.QTY < itemPurchaseQTY){
+            //     console.log("Sorry we currently only have " +itemObj.QTY+ " of this product left, please select a lower quantity until we restock.")
+            // }
+            // else{                
+            //     updateStock(itemID,itemPurchaseQTY);
+            // }
 
         });
+        
 }
 
 
-
-
-function stockCheck(id,qty){
+function itemQuery(id){
     // checks if the product have inventory available for sale by checking the ID and QTY available in the database
     // 
-
-
+    var query = "SELECT item_id as ID, product_name as PRODUCT, department_name as DEPT, price as PRICE, stock_quantity as QTY FROM products WHERE item_id =?";
+    connection.query(query,id,function(err,res){
+        if (err) throw err;
+        console.log("itemQuery: " +JSON.stringify(res[0]));
+        return res[0];
+        
+    });
 }
 
 
+function updateStock(id,qty){
+    // Pass it a product ID and QTY and it will add/subtract that amount to the database
+    var query = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id=?";
+    connection.query(query,[id,qty], function(err, res){
+        if (err) throw err;
+        console.log("Purchase successful, Thank you come back soon!\n");
+        entryPoint();
+    });
 
-
-
-
-// function updateStock(id,qty){
-//     // Pass it a product ID and QTY and it will add/subtract that amount to the database
-
-
-
-// }
-
-
-
-
+}
 
 
 
