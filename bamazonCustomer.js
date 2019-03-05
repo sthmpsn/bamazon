@@ -66,7 +66,7 @@ function displayInventory(){
             console.log(res[i].ID + " | " + res[i].PRODUCT + " | $" +res[i].PRICE + " | " +res[i].QTY);
         }
         console.log("\n");
-        console.table(res);
+        // console.table(res);
         entryPoint();
     });
 
