@@ -1,7 +1,7 @@
 require("dotenv").config();      
+require('console.table');
 
 const keys = require("./keys.js");     // hide the username and pw used to connect to the mysql db
-const cTable = require('console.table');
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 
@@ -17,7 +17,7 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
-    entryPoint();
+    displayInventory();
 });
 
 
@@ -59,14 +59,9 @@ function entryPoint(){
 
 function displayInventory(){
     var query = "SELECT item_id as ID, product_name as PRODUCT,price as PRICE, stock_quantity as QTY FROM products";
-    connection.query(query,null,function(err,res){
-        console.log("\n");
+    connection.query(query,function(err,res){
         if (err) throw err;
-        for (var i=0; i < res.length;i++){
-            console.log(res[i].ID + " | " + res[i].PRODUCT + " | $" +res[i].PRICE + " | " +res[i].QTY);
-        }
-        console.log("\n");
-        // console.table(res);
+        console.table(res);
         entryPoint();
     });
 
