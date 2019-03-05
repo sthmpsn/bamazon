@@ -21,7 +21,6 @@ connection.connect(function(err) {
 });
 
 
-
 function entryPoint(){
     inquirer
         .prompt(
@@ -53,14 +52,11 @@ function entryPoint(){
         });
 }
 
-
-
-
-
 function displayInventory(){
     var query = "SELECT item_id as ID, product_name as PRODUCT,price as PRICE, stock_quantity as QTY FROM products";
     connection.query(query,function(err,res){
         if (err) throw err;
+        console.log("\n");
         console.table(res);
         entryPoint();
     });
@@ -88,9 +84,16 @@ function purchaseProduct(){
             var query = "SELECT item_id as ID, product_name as PRODUCT, department_name as DEPT, price as PRICE, stock_quantity as QTY FROM products WHERE item_id =?";
             connection.query(query,itemID,function(err,res){
                 if (err) throw err;
-                console.log("itemQuery: " +JSON.stringify(res[0]));
-                if (res.QTY < itemPurchaseQTY){
-                    console.log("Sorry we currently only have " +res.QTY+ " of this product left, please select a lower quantity until we restock.")
+                // console.log("item Details: " +JSON.stringify(res[0]));   //good for debugging the item object details
+                if (res[0].QTY < itemPurchaseQTY){
+                    console.log(`
+▄███▄░░▄███▄░░████▄░████▄░██▄░░▄██
+▀█▄▀▀░██▀░▀██░██░██░██░██░░▀████▀░
+▄▄▀█▄░██▄░▄██░████▀░████▀░░░░██░░░
+▀███▀░░▀███▀░░██░██░██░██░░░░██░░░ 
+                    `);
+                    console.log("We currently only have " +res[0].QTY+ " of this product left, please select a lower quantity until we restock.\n");
+                    entryPoint();
                 }
                 else{                
                     updateStock(itemID,itemPurchaseQTY);
@@ -110,7 +113,6 @@ function updateStock(id,qty){
     });
 
 }
-
 
 
 function exit(){
