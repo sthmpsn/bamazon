@@ -93,7 +93,7 @@ function purchaseProduct(){
 ▀███▀░░▀███▀░░██░██░██░██░░░░██░░░ 
                     `);
                     console.log("We currently only have " +res[0].QTY+ " of this product left, please select a lower quantity until we restock.\n");
-                    entryPoint();
+                    displayInventory();
                 }
                 else{                
                     updateStock(itemID,itemPurchaseQTY);
@@ -107,9 +107,8 @@ function updateStock(id,qty){
     var query = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id=?";
     connection.query(query,[qty,id], function(err, res){
         if (err) throw err;
-        console.log("Purchase successful, Thank you come back soon!\n");
+        console.log("Purchase successful, Thank you come back soon!");
         displayInventory();
-        entryPoint();
     });
 
 }
