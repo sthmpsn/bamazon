@@ -14,3 +14,13 @@
 
 # Using the Program
 * Use the screenshots located in the "screenshots" folder for more info on how to use the CLI
+
+# Screenshots
+## Run Program
+![01-RunProgram](screenshots/01-run-program.jpg)
+## Purchase Item
+![02-Purchase](screenshots/02-purchase-item.jpg)
+## Purchase Out of Stock
+![03-PurchaseOutOfStock](screenshots/03-purchase-OutOfStock-item.jpg)
+## Exit
+![04-Exit](screenshots/04-Exit.jpg)
