@@ -1,7 +1,7 @@
 # BAMazon
+Command Line javascript application that simulates a store front inventory system
 
-
-# Running the Program 
+## Running the Program 
 
 1) Clone the repo locally and run
 2) Open a command prompt or bash shell 
@@ -12,15 +12,15 @@
 
 4) Back at the command prompt or bash sheel run "node bamazonCustomer.js"
 
-# Using the Program
-* Use the screenshots located in the "screenshots" folder for more info on how to use the CLI
-
-# Screenshots
-## Run Program
+## Screenshots
+### Run Program
 ![01-RunProgram](screenshots/01-run-program.jpg)
-## Purchase Item
+### Purchase Item
 ![02-Purchase](screenshots/02-purchase-item.jpg)
-## Purchase Out of Stock
+### Purchase Out of Stock
 ![03-PurchaseOutOfStock](screenshots/03-purchase-OutOfStock-item.jpg)
-## Exit
+### Exit
 ![04-Exit](screenshots/04-Exit.jpg)
+
+## Contributors
+* Steve Thompson (sthmpsn)
